@@ -1,11 +1,11 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { TransacoesComponent } from './transacoes.component';
+import { SideNavComponent } from './side-nav.component';
 
-describe('TransacoesComponent', () => {
-  let component: TransacoesComponent;
-  let fixture: ComponentFixture<TransacoesComponent>;
+describe('SideNavComponent', () => {
+  let component: SideNavComponent;
+  let fixture: ComponentFixture<SideNavComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -14,7 +14,7 @@ describe('TransacoesComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TransacoesComponent);
+    fixture = TestBed.createComponent(SideNavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

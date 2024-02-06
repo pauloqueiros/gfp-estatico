@@ -1,0 +1,372 @@
+@use "@angular/material" as mat;
+@use 'sass:map';
+
+@include mat.core();
+
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+$light-focused: rgba(white, 0.12);
+
+
+$grey-palette: (
+  50: #fafafa,
+  100: #f5f5f5,
+  200: #eeeeee,
+  300: #e0e0e0,
+  400: #bdbdbd,
+  500: #9e9e9e,
+  600: #757575,
+  700: #616161,
+  800: #333333,
+  900: #212121,
+  1000: #151515,
+  A100: #ffffff,
+  A200: #eeeeee,
+  A400: #bdbdbd,
+  A700: #616161,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $dark-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$dark-theme-background-palette: (
+  status-bar: black,
+  app-bar:    map.get($grey-palette, 900),
+  background: #222222,
+  hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
+  card:       map.get($grey-palette, 800),
+  dialog:     map.get($grey-palette, 1000),
+  disabled-button: rgba(white, 0.12),
+  raised-button: map.get($grey-palette, 800),
+  focused-button: $light-focused,
+  selected-button: map.get($grey-palette, 900),
+  selected-disabled-button: map.get($grey-palette, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map.get($grey-palette, 700),
+  disabled-list-option: rgba(white, 0.12),
+  tooltip: map.get($grey-palette, 700),
+);
+
+
+$my-purple-palette: (
+    50: #e0d3ff,
+    100: #b3a8ff,
+    200: #857dff,
+    300: #5d52ff,
+    400: #754bff,  // A400 (cor de referência)
+    500: #4d20ff,
+    600: #4318ff,
+    700: #3910ff,
+    800: #3007ff,
+    900: #1c00ff,
+    A100: #d3b3ff,
+    A200: #a080ff,
+    A400: #754bff,  // A400 (cor de referência)
+    A700: #6900ff,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$my-red-palette: (
+    50: #fce1e1,
+    100: #f6b4b4,
+    200: #f08484,
+    300: #eb5555,
+    400: #e85353,  // A400 (cor de referência)
+    500: #e52323,
+    600: #e31d1d,
+    700: #e11717,
+    800: #df1111,
+    900: #db0505,
+    A100: #ff9c9c,
+    A200: #ff6e6e,
+    A400: #e85353,  // A400 (cor de referência)
+    A700: #e64b4b,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$my-green-palette: (
+    50: #e3f8ec,
+  100: #b0e3c3,
+  200: #7edf9a,
+  300: #4cdc70,
+  400: #53e87d,  // A400 (cor de referência)
+  500: #1acc41,
+  600: #16b63a,
+  700: #12a033,
+  800: #0d8a2c,
+  900: #067525,
+  A100: #8dffab,
+  A200: #c1ffa1,
+  A400: #53e87d,  // A400 (cor de referência)
+  A700: #4ae66f,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$my-primary: mat.define-palette($my-purple-palette, A400);
+$my-accent: mat.define-palette($my-green-palette, A400);
+$my-warn: mat.define-palette($my-red-palette, A400);
+
+$my-custom-level: mat.define-typography-level(
+  $font-family: Roboto,
+  $font-weight: 400,
+  $font-size: 1rem,
+  $line-height: 1,
+  $letter-spacing: normal,
+);
+
+// Variáveis para definir as propriedades comuns
+$font-family-base: "'Inter', sans-serif";
+$font-size-base: 16px; 
+$line-height-base: 1.5;
+$color-base: #333;
+
+$heading-font-family: "'Inter', sans-serif";
+$regular-font-family: "'Inter', sans-serif";
+
+$my-app-typography: mat.define-typography-config(
+  $font-family: $regular-font-family,
+  $headline-1: mat.define-typography-level($font-family: $heading-font-family, $font-size: 112px),
+  $headline-2: mat.define-typography-level($font-family: $heading-font-family, $font-size: 56px),
+  $headline-3: mat.define-typography-level($font-family: $heading-font-family, $font-size: 45px, $line-height: 48px),
+  $headline-4: mat.define-typography-level($font-family: $heading-font-family, $font-size: 34px, $line-height: 40px),
+  $headline-5: mat.define-typography-level($font-family: $heading-font-family, $font-size: 24px, $line-height: 32px),
+  $headline-6: mat.define-typography-level($font-family: $heading-font-family, $font-size: 20px, $line-height: 32px),
+  $subtitle-1: mat.define-typography-level($font-family: $heading-font-family, $font-size: 18px, $line-height: 28px),
+  $subtitle-2: mat.define-typography-level($font-family: $heading-font-family, $font-size: 18px, $line-height: 24px),
+  $body-2: mat.define-typography-level($font-size: 16px),
+  $body-1: mat.define-typography-level($font-size: 16px),
+  $button: mat.define-typography-level($font-size: 16px),
+);
+
+$my-theme: mat.define-dark-theme(
+    (
+        color: (
+            primary: $my-primary,
+            accent: $my-accent,
+            warn: $my-warn
+            
+        ),
+        typography: $my-app-typography,
+        density: 0
+    )
+);
+
+// #background - > #222222
+// #"selecionaddo" -> #1C1C1C
+// #botoes e fields -> #333333
+// sidenavbackgound -> 151515
+// Background for dark theme.
+
+$my-theme: map.set($my-theme, 'color', 'background', $dark-theme-background-palette);
+$my-theme: map.set($my-theme, 'background', $dark-theme-background-palette);
+
+@include mat.all-component-themes($my-theme);
+@include mat.typography-hierarchy($my-app-typography);
+
+
+// Reset básico
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+// Correção para font-size no HTML5
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+// Correção para font-size no HTML5
+audio,
+canvas,
+video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+// Correção para font-size no HTML5
+nav ul {
+    list-style: none;
+}
+
+// Elementos 'blockquote' e 'q' precisam de aspas para serem exibidos corretamente em todos os navegadores
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+    content: none;
+}
+
+// Elementos de 'table' têm espaçamento e bordas modelados no modelo de tabela, evitando espaçamento desigual
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+// Estilização básica do corpo
+body {
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: $color-base;
+    background-color: #fff;
+}

@@ -1,0 +1,51 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav custom-side-nav"  fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>
+      <img src="assets/icon.svg">
+      <p class="p-menu">Open on Sunday</p>
+    </mat-toolbar>
+    <mat-nav-list class="mat-nav-list">
+      <button class="button-custom" mat-raised-button color="primary">
+        <div class="container-home">
+          <mat-icon class="icon-home">home</mat-icon>
+          Página Inicial
+        </div>
+      </button>
+      <mat-list-item class="mat-list-item">
+        <mat-icon class="icon-sidenav" matListItemIcon>sort</mat-icon>
+        <div class="title-menu-item" matListItemTitle>Categorias</div>
+      </mat-list-item>
+      <mat-list-item class="mat-list-item">
+        <mat-icon class="icon-sidenav" matListItemIcon>local_atm</mat-icon>
+        <div class="title-menu-item" matListItemTitle>Transação</div>
+      </mat-list-item>
+      <mat-list-item class="mat-list-item">
+        <mat-icon class="icon-sidenav" matListItemIcon>group</mat-icon>
+        <div class="title-menu-item" matListItemTitle>Contato</div>
+      </mat-list-item>
+      <mat-list-item class="mat-list-item">
+        <mat-icon class="icon-sidenav" matListItemIcon>settings</mat-icon>
+        <div class="title-menu-item" matListItemTitle>Configurações</div>
+      </mat-list-item>
+      <button class="button-custom bottom" mat-raised-button color="primary">
+        <div class="container-home">
+          <mat-icon class="icon-home">sentiment_very_satisfied</mat-icon>
+          Olá, Paulo
+        </div>
+      </button>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      @if (isHandset$ | async) {
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      }
+      <span>gfp-estatico</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

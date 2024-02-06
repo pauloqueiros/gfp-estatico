@@ -5,7 +5,11 @@
   "projects": {
     "gfp-estatico": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -20,13 +24,14 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
+              "src/assets/icon.svg",
               "src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -85,13 +90,14 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
+              "src/assets/icon.svg",
               "src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -100,6 +106,6 @@
     }
   },
   "cli": {
-    "analytics": "11a62213-41b0-4ce4-9a9c-4a220745756f"
+    "analytics": "0e45295e-3b8e-4674-99de-26cb5a3ecd27"
   }
 }
