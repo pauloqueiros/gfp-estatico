@@ -1,0 +1,148 @@
+.full-width-table {
+  width: 100%;
+}
+
+
+.date-trasacao{
+  border-radius: 30px;
+}
+
+th , td {
+  border-bottom: none;
+}
+
+.data-form-field {
+  width: 140px !important;
+}
+
+.card-table{
+  border-radius: 6px;
+  padding: 11px;
+  background-color: #333333;
+}
+
+/* Aumenta a especificidade ao adicionar uma classe ao seletor */
+.mat-elevation-z8 {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.checkbox-container {
+  height: 30px;
+  display: flex;
+  transform: scale(1.8);
+  align-items: center; /* Centraliza o checkbox verticalmente */
+}
+
+.data-form-field {
+  background: none !important;
+}
+
+.full-width-table {
+  background: none !important;
+}
+
+.cartao-form-field{
+  width: 120px !important;
+}
+
+.categoria-form-field{
+  width: 120px !important;
+}
+
+.valor-form-field{
+  width: 120px !important;
+}
+
+.tipo-pagamento-form-field{
+  width: 180px !important;
+}
+
+.despesa-form-field{
+  width: 120px !important;
+}
+
+.contato-form-field{
+  width: 120px !important;
+}
+
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0 8px 0 16px;
+}
+
+mat-paginator{
+  background: none !important;
+}
+
+mat-divider {
+  padding: 20px 0;
+}
+
+.buttom-tipos{
+  height: 39px;
+}
+
+.button-container-mes {
+  display: flex;
+  justify-content: space-between;
+  padding: 120px 15px 0px 15px;
+}
+
+.expense-types {
+  display: flex;
+  gap: 10px;
+}
+
+.pago-check{
+  height: 45px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 120px;
+}
+
+.button-container-item:first-child {
+  margin-right: 16px;
+}
+
+
+// .mat-form-field {
+//   background-color: #333333;
+//   color: white !important;
+// }
+
+// .mat-form-field .mat-input-element,
+// .mat-form-field .mat-select-value,
+// .mat-form-field .mat-select-arrow {
+//   color: white !important;
+// }
+
+// .mat-form-field .mat-form-field-underline {
+//   background-color: white !important;
+// }
+
+// .mat-form-field .mat-form-field-ripple {
+//   background-color: white !important;
+// }
+
+// .mat-form-field .mat-option-text {
+//   color: white !important;
+// }
+
+// .mat-form-field-appearance-fill .mat-form-field-flex::before,
+// .mat-form-field-appearance-fill .mat-form-field-flex::after {
+//   background-color: white !important;
+// }
+
+// .mat-form-field-label {
+//   color: white !important;
+// }
