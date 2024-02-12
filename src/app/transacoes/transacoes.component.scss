@@ -11,6 +11,10 @@ th , td {
   border-bottom: none;
 }
 
+.td-pago{
+  width: 106px;
+}
+
 .data-form-field {
   width: 140px !important;
 }
@@ -19,6 +23,14 @@ th , td {
   border-radius: 6px;
   padding: 11px;
   background-color: #333333;
+}
+
+.card-table.check{
+  border-radius: 12px;
+  padding: 6px;
+  color: #9E81FF;
+  width: 24px;
+  height: 26px;
 }
 
 /* Aumenta a especificidade ao adicionar uma classe ao seletor */
@@ -40,6 +52,7 @@ th , td {
 
 .full-width-table {
   background: none !important;
+  margin-bottom: 5px;
 }
 
 .cartao-form-field{
@@ -66,12 +79,23 @@ th , td {
   width: 120px !important;
 }
 
+.button-acoes {
+  width: 36px !important;
+  height: 36px !important;
+}
+
 .mdc-data-table__cell, .mdc-data-table__header-cell {
-  padding: 0 8px 0 16px;
+  padding: 10px 8px 10px 8px;
+}
+
+
+.mat-mdc-row:hover{
+  background-color: #1C1C1C;
 }
 
 mat-paginator{
   background: none !important;
+  padding: 0 68px;
 }
 
 mat-divider {
@@ -85,7 +109,7 @@ mat-divider {
 .button-container-mes {
   display: flex;
   justify-content: space-between;
-  padding: 120px 15px 0px 15px;
+  padding: 120px 68px 0;
 }
 
 .expense-types {
@@ -94,7 +118,7 @@ mat-divider {
 }
 
 .pago-check{
-  height: 45px;
+  width: 70px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -107,13 +131,67 @@ mat-divider {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  width: 120px;
+  width: 90px;
+  gap: 16px;
 }
 
-.button-container-item:first-child {
-  margin-right: 16px;
+.icon-transacao{
+  color: white;
+  background-color: #754bff;
+  border-radius: 10px;
 }
 
+.button-transacao{
+  width: 100%;
+  display: flex;
+  height: 100%;
+  flex-direction: row-reverse;
+  align-content: center;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 0 68px;
+}
+
+.container-transacao {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: start;
+  width: 100%;
+  height: 39px;
+  align-items: center;
+  margin-bottom: 20px;
+
+}
+
+.init-and-final{
+  width: 60px;
+}
+
+.th-pago{
+  width: 80px;
+}
+
+.selected {
+  background-color: #754bff;
+}
+
+.container-button-despesa{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-despesa{
+  height: 39px;
+}
 
 // .mat-form-field {
 //   background-color: #333333;

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableModule, MatTable } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
@@ -16,13 +16,10 @@ import { MatDivider } from '@angular/material/divider';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TransacoesService } from '../services/transacoes.service';
 import { TransacoesResponse } from '../interfaces/transacoes.interface';
-import { Observable } from 'rxjs';
-import { DatePipe } from '@angular/common';
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
+import { CommonModule, DatePipe } from '@angular/common';
+import { DespesaResponse } from '../interfaces/despesas.interface';
+import { periodos } from '../interfaces/periodos.interfacece';
+import {MatTableDataSource} from '@angular/material/table';
 
 
 @Component({
@@ -48,51 +45,55 @@ interface Food {
     MatButtonModule,
     MatButtonModule,
     MatButtonToggleModule,
-    DatePipe
+    DatePipe,
+    CommonModule
   ],
 })
 export class TransacoesComponent implements AfterViewInit {
+  displayedColumns = ['init', 'data', 'descricao', 'cartao', 'categoria', 'valor', 'tipoPagamento', 'despesa', 'contato', 'pago', 'acoes', 'final'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<TransacoesItem>;
-  dataSource = new TransacoesDataSource();
   transacoes: TransacoesResponse[] = [];
+  despesas: DespesaResponse[] = [];
+  selectedId: number | null = 5;
+  periodos: periodos[] = [
+    { value: '0', viewValue: 'Este Mês' },
+    { value: '1', viewValue: 'Essa Semana' },
+    { value: '2', viewValue: 'Hoje' },
+  ];
+  selectedPeriodo = this.periodos[0].value;
+  dataSource = new MatTableDataSource<TransacoesResponse>();   
+  
   constructor(private service: TransacoesService) { }
+  ngAfterViewInit(): void {
+    this.getTransacoes(this.selectedId ?? 5);
+    this.getDespesas();
+    this.dataSource.data = this.transacoes;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  getTransacoes(selectedId: number): void {
+    this.service.listarTransacoes(selectedId).subscribe((res) => {
+      this.transacoes = res;
+    });
+  }
+
+  getDespesas(): void {
+    this.service.listarDespesas().subscribe(despesas => this.despesas = despesas);
+  }
+
+  onButtonClick(id: number, nome: string): void {
+    this.selectedId = id;
+    console.log(id, nome);
+  }
 
   date = new FormControl(new Date());
   serializedDate = new FormControl(new Date().toISOString());
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['data', 'descricao', 'cartao', 'categoria', 'valor', 'tipoPagamento', 'despesa', 'contato', 'pago', 'acoes'];
 
 
-  foods: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' },
-  ];
 
   isPago(indicador_pago: string): boolean {
     return indicador_pago === 'S' ? true : false;
   }
 
-  ngAfterViewInit(): void {
-    this.service.listarTransacoes().subscribe((res) => {
-      this.transacoes = res;
-    });
-  // ngAfterViewInit(): void {
-  //   this.service.listarTransacoe().subscribe((res: TransacoesResponse[]) => {
-  //     this.transacoes = [];
-  //     res.forEach(transacoesResponse => {
-  //       transacoesResponse.response.forEach(transacao => {
-  //         transacao.check = transacao.indicador_pago === 'S';
-  //         this.transacoes.push(transacao);
-  //       });
-  //     });
-  //   });
-
-
-    this.dataSource.sort = this.sort;
-this.dataSource.paginator = this.paginator;
-this.table.dataSource = this.dataSource;
-  }
 }
