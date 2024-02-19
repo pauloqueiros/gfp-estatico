@@ -1,0 +1,291 @@
+.full-width-table {
+  width: 100%;
+  background: none !important;
+  margin-bottom: 5px;
+}
+
+.container-th {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+// mat-form-field{
+//   border-radius: 6px;
+//   padding: 11px;
+// }
+
+.mat-form-field-incluir {
+  width: 100%;
+}
+
+th,
+td {
+  border-bottom: none;
+}
+
+mat-divider {
+  padding: 20px 0;
+}
+
+.init-and-final {
+  width: 60px;
+}
+
+// Campo DATA
+
+// .card-table.data {
+//   width: 150px;
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: nowrap;
+//   gap: 8px;
+//   padding-right: 0;
+//   align-content: center;
+//   justify-content: flex-start;
+//   align-items: center;
+// }
+
+.data {
+  width: 130px !important;
+}
+
+// CAMPO DESCRIÇÃO
+
+// .incluir-descricao {
+//   width: 302px !important;
+// }
+
+.descricao-texto {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+.descricao {
+  width: 300px !important;
+}
+
+// CAMPO CARTÃO
+
+// .incluir-cartao {
+//   width: 94px !important;
+// }
+
+.cartao {
+  width: 118px !important;
+}
+
+// CAMPO CATEGORIA
+
+// .incluir-categoria {
+//   width: 110.34px !important;
+// }
+
+.categoria {
+  width: 142px !important;
+}
+
+// CAMPO VALOR
+
+// .incluir-valor {
+//   width: 74.2px !important;
+// }
+
+.valor {
+  width: 136px !important;
+}
+
+// CAMPO TIPO DE PAGAMENTO
+
+// .incluir-tipo-pagamento {
+//   width: 161px !important;
+// }
+
+.tipo-pagamento {
+  width: 140px !important;
+}
+
+// CAMPO DESPESA
+
+.despesa {
+  width: 170px !important;
+}
+
+// CAMPO CONTATO
+
+.contato {
+  width: 156px !important;
+}
+
+// .incluir-contato {
+//   width: 165px !important;
+// }
+
+// CAMPO PAGO
+
+.card-table.check {
+  border-radius: 12px;
+  padding: 6px;
+  color: #9e81ff;
+  width: 24px;
+  height: 26px;
+}
+
+.pago {
+  width: 36px !important;
+  padding: 0 10px 0 8px;
+}
+
+// .checkbox-container {
+//   height: 30px;
+//   display: flex;
+//   transform: scale(1.8);
+//   align-items: center; /* Centraliza o checkbox verticalmente */
+// }
+
+// .pago-check-incluir {
+//   height: 60px;
+// }
+
+// .incluir-pago {
+//   width: 36px !important;
+// }
+
+.checkbox-container.pago {
+  padding: 0 0px 0 12px;
+}
+
+.incluir-pago-check {
+  transform: scale(1.8);
+}
+
+// .th-pago {
+//   width: 80px;
+// }
+
+// CAMPO AÇÕES
+
+.acoes {
+  width: 90px !important;
+}
+
+.button-acoes {
+  width: 36px !important;
+  height: 36px !important;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 90px;
+  gap: 16px;
+}
+
+// ----------------------------------------------------//
+
+// TABELA
+
+.card-table {
+  border-radius: 6px;
+  padding: 11px;
+  background-color: #333333;
+}
+
+// .mdc-data-table__cell,
+// .mdc-data-table__header-cell {
+//   padding: 10px 8px 10px 8px;
+// }
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0 6px 12px 8px !important;
+}
+
+.mat-mdc-row:hover {
+  background-color: #1c1c1c;
+}
+
+// PAGINATOR
+
+mat-paginator {
+  background: none !important;
+  padding: 0 68px;
+}
+
+// FILTRO MESES
+
+.button-container-mes {
+  display: flex;
+  justify-content: space-between;
+  padding: 70px 54px 20px;
+}
+
+// BOTÃO NOVA TRANSAÇÃO
+
+.icon-transacao {
+  color: white;
+  background-color: #754bff;
+  border-radius: 10px;
+}
+
+.button-transacao {
+  width: 100%;
+  display: flex;
+  height: 100%;
+  flex-direction: row-reverse;
+  align-content: center;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 0 3.1%;
+}
+
+.container-transacao {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: start;
+  width: 100%;
+  height: 39px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+// BOTOES DESPESA
+.selected {
+  background-color: #754bff;
+}
+.container-button-despesa {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-despesa {
+  height: 39px;
+}
+
+/* Aumenta a especificidade ao adicionar uma classe ao seletor */
+.mat-elevation-z8 {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+ng-container.hide td.mat-footer-cell {
+  display: none;
+}
+
+.hide-footer {
+  display: none;
+}

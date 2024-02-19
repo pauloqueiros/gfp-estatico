@@ -10,6 +10,7 @@ interface TransacaoItem {
     indicador_pago: string;
     tipo_pagamento: string;
     cartao: string;
+    cor_cartao: string;
     tipo_despesa: string;
   }
   

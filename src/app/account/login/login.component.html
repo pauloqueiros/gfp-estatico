@@ -1,0 +1,30 @@
+<div class="container-login">
+    <div class="container-logo">
+        <img src="assets/icon.svg">
+        <p class="p-menu">Open on Sunday</p>
+    </div>
+    <form class="container-form" (ngSubmit)="onSubmit()" #form="ngForm">
+        <div class="form-group">
+            <p class="email">
+                E-mail
+            </p>
+            <mat-form-field class="full-width" appearance="outline" subscriptSizing="dynamic">
+                <input matInput placeholder="Enter your E-mail" type="email" id="email" name="email" [(ngModel)]="login.email"
+                    required>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <p class="pass">
+                Password
+            </p>
+            <mat-form-field class="full-width" appearance="outline" subscriptSizing="dynamic">
+                <input matInput placeholder="Enter your password" type="password" id="password" name="password"
+                    [(ngModel)]="login.senha" required>
+            </mat-form-field>
+        </div>
+        <div class="container-button">
+            <button mat-raised-button color="primary" [disabled]="form.form.invalid">Entrar</button>
+            <a class="link-conta" [routerLink]="['/create-account']">Registre-se</a>
+        </div>
+    </form>
+</div>

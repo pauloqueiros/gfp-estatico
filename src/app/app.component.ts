@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SideNavComponent } from "./side-nav/side-nav.component";
+import { SideNavComponent } from "./layout/side-nav/side-nav.component";
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
 

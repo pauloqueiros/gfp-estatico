@@ -1,0 +1,318 @@
+<div class="mat-elevation-z8">
+
+  <div class="button-container-mes">
+    <mat-form-field subscriptSizing="dynamic" class="" appearance="outline">
+      <mat-select [value]="selectedPeriodo">
+        @for (periodo of periodos; track periodo) {
+        <mat-option [value]="periodo.value">{{periodo.viewValue}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <div class="container-button-despesa">
+      <div *ngFor="let despesa of despesas">
+        <button class="button-despesa" [class.selected]="despesa.id_tipo_despesa === selectedId" mat-raised-button
+          (click)="onButtonClick(despesa.id_tipo_despesa, despesa.nome)">{{despesa.nome}}</button>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <form [formGroup]="transacaoForm" (ngSubmit)="submit()">
+    <table mat-table [dataSource]="dataSource" class="full-width-table" matSort aria-label="Elements">
+
+      <ng-container matColumnDef="init">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td class="init-and-final" mat-cell *matCellDef="let element">
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="data">
+        <th class="mat-header-cell" mat-header-cell *matHeaderCellDef> Data </th>
+        <td class="data" mat-cell *matCellDef="let element">
+          <div class="data">
+            <div class="card-table">
+              {{element.response?.data_transacao | date:'dd/MM/yyyy'}}
+            </div>
+          </div>
+        </td>
+        <!-- INCLUIR DATA -->
+        <td class="data" mat-footer-cell *matFooterCellDef>
+          <mat-form-field class="data" *ngIf="showFormFields" subscriptSizing="dynamic" appearance="outline">
+            <input matInput [matDatepicker]="picker" formControlName='data'>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef> Descrição </th>
+        <td class="descricao" mat-cell *matCellDef="let element">
+          <div class="descricao">
+            <div class="card-table descricao-texto" matTooltipPosition="above"
+              [matTooltip]="element.response?.descricao">
+              {{element.response?.descricao}}
+            </div>
+          </div>
+        </td>
+        <!-- INCLUIR DESCRICAO -->
+        <td class="descricao" mat-footer-cell *matFooterCellDef>
+          <mat-form-field class="descricao" *ngIf="showFormFields" subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Descrição</mat-label>
+            <input matInput formControlName='descricao'>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cartao">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="container-th">
+            <div class="cartao-th">
+              Cartão
+            </div>
+            <div class="button-th">
+              <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </th>
+        <td class="cartao" mat-cell *matCellDef="let element">
+          <div class="cartao">
+            <div class="card-table" [style.border-bottom]="'1px solid ' + element.response?.cor_cartao">
+              {{element.response?.cartao}}
+            </div>
+          </div>
+        </td>
+        <!-- INCLUIR CARTAO -->
+        <td class="cartao" mat-footer-cell *matFooterCellDef>
+          <mat-form-field class="cartao" *ngIf="showFormFields" subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Cartão</mat-label>
+            <mat-select formControlName='cartao'>
+              @for (food of periodos; track periodos) {
+              <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="categoria">
+        <th mat-header-cell *matHeaderCellDef> 
+          <div class="container-th">
+            <div class="categoria-th">
+              Categoria
+            </div>
+            <div class="button-th">
+              <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </th>
+        <td class="categoria" mat-cell *matCellDef="let element">
+          <div class="categoria">
+            <div class="card-table">
+              {{element.response?.categoria}}
+            </div>
+          </div>
+        </td>
+        <!-- INCLUIR CATEGORIA -->
+        <td class="categoria" mat-footer-cell *matFooterCellDef>
+          <mat-form-field class="categoria" *ngIf="showFormFields" subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName='categoria'>
+              @for (food of periodos; track periodos) {
+              <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="valor">
+        <th mat-header-cell *matHeaderCellDef> Valor </th>
+        <td class="valor" mat-cell *matCellDef="let element">
+          <div class="valor">
+            <div class="card-table">
+              {{element.response?.valor | currency:'BRL':'symbol':'1.2-2'}}
+            </div>
+          </div>
+        </td>
+        <!-- INCLUIR VALOR -->
+        <td class="valor" mat-footer-cell *matFooterCellDef>
+          <mat-form-field class="valor" *ngIf="showFormFields" subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Valor</mat-label>
+            <input matInput value="" formControlName='valor'>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tipoPagamento">
+        <th mat-header-cell *matHeaderCellDef> 
+          <div class="container-th">
+            <div class="tipo-pagamento-th">
+              Tipo Pgto
+            </div>
+            <div class="button-th">
+              <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </th>
+        <td class="tipo-pagamento" mat-cell *matCellDef="let element">
+          <div class="tipo-pagamento">
+            <div class="card-table">
+              {{element.response?.tipo_pagamento}}
+            </div>
+          </div>
+        </td>
+        <!-- INCLUIR TIPO PAGAMETNO -->
+        <td class="tipo-pagamento" mat-footer-cell *matFooterCellDef>
+          <mat-form-field class="tipo-pagamento" *ngIf="showFormFields" subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Tipo Pagamento</mat-label>
+            <mat-select formControlName='tipoPagamento'>
+              @for (food of periodos; track food) {
+              <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="despesa">
+        <th mat-header-cell *matHeaderCellDef> 
+          <div class="container-th">
+            <div class="tipo-pagamento-th">
+              Despesa
+            </div>
+            <div class="button-th">
+              <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </th>
+        <td class="despesa" mat-cell *matCellDef="let element">
+          <div class="despesa">
+            <div class="card-table">
+              {{element.response?.tipo_despesa}}
+            </div>
+          </div>
+        </td>
+        <!-- INCLUIR DESPESA -->
+        <td class="despesa" mat-footer-cell *matFooterCellDef>
+          <mat-form-field class="despesa" *ngIf="showFormFields" subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Despesa</mat-label>
+            <mat-select formControlName='despesa'>
+              @for (food of periodos; track food) {
+              <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contato">
+        <th mat-header-cell *matHeaderCellDef> Contato </th>
+        <td class="contato" mat-cell *matCellDef="let element">
+          <div class="contato">
+            <div class="card-table">
+              {{element.response?.contato}}
+            </div>
+          </div>
+        </td>
+        <!-- INCLUIR CONTATO -->
+        <td class="contato" mat-footer-cell *matFooterCellDef>
+          <mat-form-field class="contato" *ngIf="showFormFields" subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Contato</mat-label>
+            <mat-select formControlName='contato'>
+              @for (food of periodos; track food) {
+              <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pago">
+        <th mat-header-cell *matHeaderCellDef class="th-pago">Pago?</th>
+        <td class="pago-check pago" mat-cell *matCellDef="let element">
+          <div class="pago">
+            <div class="card-table check">
+              <mat-icon *ngIf="isPago(element?.response.indicador_pago)">check</mat-icon>
+            </div>
+          </div>
+        </td>
+        <!-- INCLUIR PAGO -->
+        <td mat-footer-cell *matFooterCellDef class="pago-check pago pago-check-incluir">
+          <div *ngIf="showFormFields" class="checkbox-container pago">
+            <mat-checkbox class="incluir-pago-check" formControlName='pago' color="primary" mat-fab></mat-checkbox>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td class="acoes" mat-cell *matCellDef="let row">
+          <div class="acoes">
+            <div class="button-container">
+              <div class="button-container-item">
+                <button color="primary" class="button-acoes" mat-mini-fab
+                  aria-label="Example icon button with a filter list icon">
+                  <mat-icon>create</mat-icon>
+                </button>
+              </div>
+              <div class="button-container-item">
+                <button color="primary" class="button-acoes" mat-mini-fab
+                  aria-label="Example icon button with a home icon">
+                  <mat-icon>clear</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </td>
+        <!-- INCLUIR AÇÕES -->
+        <td class="acoes" mat-footer-cell *matFooterCellDef>
+          <div class="button-container acoes" *ngIf="showFormFields">
+            <div class="button-container-item">
+              <button type="submit" class="button-acoes" color="accent" mat-mini-fab
+                aria-label="Example icon button with a filter list icon">
+                <mat-icon>check</mat-icon>
+              </button>
+            </div>
+            <div class="button-container-item">
+              <button (click)="showFormFields = false" class="button-acoes" color="warn" mat-mini-fab
+                aria-label="Example icon button with a home icon">
+                <mat-icon>clear</mat-icon>
+              </button>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="final">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td class="init-and-final" mat-cell *matCellDef="let element"></td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr [ngClass]="{'hide-footer': !showFormFields}" mat-footer-row *matFooterRowDef="displayedColumns;"></tr>
+    </table>
+  </form>
+
+  <div class="container-transacao">
+    <button (click)="showFormFields = true" mat-raised-button class="button-transacao">
+      Nova transação
+      <mat-icon class="icon-transacao">add</mat-icon>
+    </button>
+  </div>
+  <mat-paginator #paginator showFirstLastButtons [length]="transacoes.length" [pageIndex]="0" [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
+  </mat-paginator>
+</div>
