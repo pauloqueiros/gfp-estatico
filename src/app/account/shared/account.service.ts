@@ -12,6 +12,13 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AccountService {
+  getToken() {
+    return window.localStorage.getItem('token');
+  }
+
+  logout() {
+      throw new Error("Method not implemented.");
+  }
 
   url = `${environment.apiUrl}/login`;
   constructor(private httpClient: HttpClient) { }

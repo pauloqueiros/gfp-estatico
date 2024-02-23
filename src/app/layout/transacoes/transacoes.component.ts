@@ -21,7 +21,10 @@ import { periodos } from '../../interfaces/periodos.interfacece';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { catchError, throwError } from 'rxjs';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environment';
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -56,6 +59,7 @@ export class TransacoesComponent implements AfterViewInit {
   transacoes: TransacoesResponse[] = [];
   despesas: DespesaResponse[] = [];
   selectedId: number | null = 5;
+  url = `${environment.apiUrl}`;
   periodos: periodos[] = [
     { value: '0', viewValue: 'Este Mês' },
     { value: '1', viewValue: 'Essa Semana' },
@@ -77,13 +81,13 @@ export class TransacoesComponent implements AfterViewInit {
     pago: new FormControl(''),
   });
 
-  constructor(private service: TransacoesService, private _snackBar: MatSnackBar) { }
-  ngAfterViewInit(): void {
+  constructor(private service: TransacoesService, private _snackBar: MatSnackBar, private http: HttpClient) { }
+  ngAfterViewInit() {
     this.getTransacoes(this.selectedId ?? 5);
-    this.getDespesas();    
+    this.getDespesas();
   }
 
-  getTransacoes(selectedId: number): void {
+  getTransacoes(selectedId: number) {
     this.service.listarTransacoes(selectedId).pipe(
       catchError((error) => {
         console.error('Erro ao listar transações:', error);
@@ -102,10 +106,21 @@ export class TransacoesComponent implements AfterViewInit {
     this._snackBar.open(message, action);
   }
 
-  getDespesas(): void {
-    this.service.listarDespesas().subscribe(despesas => this.despesas = despesas);
+  getDespesas() {
+    const token = window.localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', token || '');
+    this.http.get<DespesaResponse[]>(this.url + "/despesa", { headers }).subscribe({
+      next: (despesas: DespesaResponse[]) => {
+        this.despesas = despesas;
+      },
+      error: (error) => {
+        console.error('Erro ao listar despesas:', error);
+        this.openSnackBar(error.error.message, 'X');
+      }
+      // this.service.listarDespesas().subscribe(despesas => this.despesas = despesas);
+    });
   }
-
   onButtonClick(id: number, nome: string): void {
     this.selectedId = id;
     console.log(id, nome);
