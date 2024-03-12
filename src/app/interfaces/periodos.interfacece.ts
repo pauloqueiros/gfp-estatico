@@ -1,4 +1,4 @@
 export interface periodos {
-    value: string;
+    value: number;
     viewValue: string;
   }

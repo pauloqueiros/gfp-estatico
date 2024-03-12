@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,6 +25,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environment';
 import { HttpHeaders } from '@angular/common/http';
+import { CartaoService } from '../../services/cartao.service';
+import { CartaoResponse } from '../../interfaces/cartoes.interface';
 
 
 @Component({
@@ -57,15 +59,16 @@ export class TransacoesComponent implements AfterViewInit {
   displayedColumns = ['init', 'data', 'descricao', 'cartao', 'categoria', 'valor', 'tipoPagamento', 'despesa', 'contato', 'pago', 'acoes', 'final'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   transacoes: TransacoesResponse[] = [];
+  cartoes:CartaoResponse[] = [];
   despesas: DespesaResponse[] = [];
-  selectedId: number | null = 5;
+  tipoDespesa: number = 5;
   url = `${environment.apiUrl}`;
   periodos: periodos[] = [
-    { value: '0', viewValue: 'Este Mês' },
-    { value: '1', viewValue: 'Essa Semana' },
-    { value: '2', viewValue: 'Hoje' },
+    { value: 0, viewValue: 'Este Mês' },
+    { value: 1, viewValue: 'Essa Semana' },
+    { value: 2, viewValue: 'Hoje' },
   ];
-  selectedPeriodo = this.periodos[0].value;
+  tipoPeriodo: number = this.periodos[0].value;
   dataSource = new MatTableDataSource<TransacoesResponse>();
   showFormFields = false;
 
@@ -81,14 +84,30 @@ export class TransacoesComponent implements AfterViewInit {
     pago: new FormControl(''),
   });
 
-  constructor(private service: TransacoesService, private _snackBar: MatSnackBar, private http: HttpClient) { }
+  constructor(private service: TransacoesService, private cartaoService: CartaoService ,private _snackBar: MatSnackBar, private http: HttpClient) { }
   ngAfterViewInit() {
-    this.getTransacoes(this.selectedId ?? 5);
+    this.getTransacoes(this.tipoDespesa, this.tipoPeriodo);
     this.getDespesas();
+    this.getCartoes();
   }
 
-  getTransacoes(selectedId: number) {
-    this.service.listarTransacoes(selectedId).pipe(
+  getCartoes() {
+    this.cartaoService.listarCartoes().subscribe({
+      next: (cartoes) => {
+        this.cartoes = cartoes;
+      },
+      error: (error) => {
+        console.error('Erro ao listar cartões:', error);
+        this.openSnackBar(error.error.message, 'X');
+      }
+    });
+  }
+
+
+  getTransacoes(tipoDespesa: number, tipoPeriodo: number) {
+    this.tipoDespesa = tipoDespesa;
+    this.tipoPeriodo = tipoPeriodo;
+    this.service.listarTransacoes(this.tipoDespesa, this.tipoPeriodo).pipe(
       catchError((error) => {
         console.error('Erro ao listar transações:', error);
         this.openSnackBar(error.error.message, 'X');
@@ -118,12 +137,17 @@ export class TransacoesComponent implements AfterViewInit {
         console.error('Erro ao listar despesas:', error);
         this.openSnackBar(error.error.message, 'X');
       }
-      // this.service.listarDespesas().subscribe(despesas => this.despesas = despesas);
     });
   }
-  onButtonClick(id: number, nome: string): void {
-    this.selectedId = id;
-    console.log(id, nome);
+
+  onDespesaClick(id: number) {
+    this.tipoDespesa = id;
+    this.getTransacoes(id, this.tipoPeriodo);
+  }
+
+  onPeriodoChange(event: any) {
+    this.tipoPeriodo = event.value;
+    this.getTransacoes(this.tipoDespesa, this.tipoPeriodo);
   }
 
   submit(): void {

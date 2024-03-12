@@ -2,16 +2,14 @@
 
   <div class="button-container-mes">
     <mat-form-field subscriptSizing="dynamic" class="" appearance="outline">
-      <mat-select [value]="selectedPeriodo">
-        @for (periodo of periodos; track periodo) {
-        <mat-option [value]="periodo.value">{{periodo.viewValue}}</mat-option>
-        }
+      <mat-select [(value)]="tipoPeriodo" (selectionChange)="onPeriodoChange($event)">
+        <mat-option *ngFor="let periodo of periodos" [value]="periodo.value">{{ periodo.viewValue }}</mat-option>
       </mat-select>
     </mat-form-field>
     <div class="container-button-despesa">
       <div *ngFor="let despesa of despesas">
-        <button class="button-despesa" [class.selected]="despesa.id_tipo_despesa === selectedId" mat-raised-button
-          (click)="onButtonClick(despesa.id_tipo_despesa, despesa.nome)">{{despesa.nome}}</button>
+        <button class="button-despesa" [class.selected]="despesa.id_tipo_despesa === tipoDespesa" mat-raised-button
+          (click)="onDespesaClick(despesa.id_tipo_despesa)">{{despesa.nome}}</button>
       </div>
     </div>
   </div>
@@ -81,8 +79,8 @@
         </th>
         <td class="cartao" mat-cell *matCellDef="let element">
           <div class="cartao">
-            <div class="card-table" [style.border-bottom]="'1px solid ' + element.response?.cor_cartao">
-              {{element.response?.cartao}}
+            <div class="card-table" [style.border-bottom]="'1px solid ' + element.response?.cartao.cor">
+              {{element.response?.cartao.nome}}
             </div>
           </div>
         </td>
@@ -91,9 +89,9 @@
           <mat-form-field class="cartao" *ngIf="showFormFields" subscriptSizing="dynamic" appearance="outline">
             <mat-label>Cartão</mat-label>
             <mat-select formControlName='cartao'>
-              @for (food of periodos; track periodos) {
-              <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-              }
+              <div *ngFor="let cartao of cartoes">
+                <mat-option [value]="cartao.id_cartao">{{cartao.nome}}</mat-option>
+              </div>
             </mat-select>
           </mat-form-field>
         </td>
@@ -115,7 +113,7 @@
         <td class="categoria" mat-cell *matCellDef="let element">
           <div class="categoria">
             <div class="card-table">
-              {{element.response?.categoria}}
+              {{element.response?.categoria.nome}}
             </div>
           </div>
         </td>
@@ -166,7 +164,7 @@
         <td class="tipo-pagamento" mat-cell *matCellDef="let element">
           <div class="tipo-pagamento">
             <div class="card-table">
-              {{element.response?.tipo_pagamento}}
+              {{element.response?.tipoPagamento.nome}}
             </div>
           </div>
         </td>
@@ -199,7 +197,7 @@
         <td class="despesa" mat-cell *matCellDef="let element">
           <div class="despesa">
             <div class="card-table">
-              {{element.response?.tipo_despesa}}
+              {{element.response?.despesa.nome}}
             </div>
           </div>
         </td>
@@ -221,7 +219,7 @@
         <td class="contato" mat-cell *matCellDef="let element">
           <div class="contato">
             <div class="card-table">
-              {{element.response?.contato}}
+              {{element.response?.contato.nome}}
             </div>
           </div>
         </td>
@@ -230,9 +228,9 @@
           <mat-form-field class="contato" *ngIf="showFormFields" subscriptSizing="dynamic" appearance="outline">
             <mat-label>Contato</mat-label>
             <mat-select formControlName='contato'>
-              @for (food of periodos; track food) {
-              <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-              }
+              <div *ngFor="let cartao of cartoes">
+                <mat-option [value]="cartao.id_cartao">{{cartao.nome}}</mat-option>
+              </div>
             </mat-select>
           </mat-form-field>
         </td>

@@ -10,15 +10,16 @@ import { DespesaResponse } from '../interfaces/despesas.interface';
 export class TransacoesService {
   private endpointUril = 'http://localhost:3000/api';
 
-  constructor(private http: HttpClient) {   }
+  constructor(private http: HttpClient) { }
 
-  listarTransacoes(selectedId: number): Observable<TransacoesResponse[]> {
-    if(selectedId === 5){
-      return this.http.get<TransacoesResponse[]>(`${this.endpointUril}/transacao`);
+  listarTransacoes(tipoDespesa: number, tipoPeriodo: number): Observable<TransacoesResponse[]> {
+    const parametros = {
+      tipoDespesa:tipoDespesa,
+      tipoPeriodo:tipoPeriodo
     }
-    return this.http.get<TransacoesResponse[]>(`${this.endpointUril}/default`);
+    return this.http.post<TransacoesResponse[]>(`${this.endpointUril}/transacao`, parametros);
   }
-  
+
   listarDespesas(): Observable<DespesaResponse[]> {
     return this.http.get<DespesaResponse[]>(`${this.endpointUril}/despesa`);
   }
